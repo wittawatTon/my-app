@@ -27,7 +27,15 @@
   padding: 40px 50px;
   display: table;
   background-color: #444;
+  min-height: 250px; ;
+  height: 30%;
 }
+
+#quote-box .top {
+  min-height: 150px; ;
+  height: 70%;
+}
+
 #quote-box #text {
   text-align: center;
   width: 100%;

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import $ from 'jquery';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,16 +22,21 @@ class QuoteMachine extends React.Component {
   }
 
   getQuote() {
-    fetch('https://type.fit/api/quotes')
-      .then(resp => resp.json())
-      .then(data => {
-        const randomQuote = data[Math.floor(Math.random() * data.length)];
-        this.setState({
-          quote: randomQuote.text,
-          author: randomQuote.author
-        });
-      })
-      .catch(err => console.error(err));
+    $("#text, #author").fadeOut(500, () => {
+      fetch('https://type.fit/api/quotes')
+        .then(resp => resp.json())
+        .then(data => {
+          const randomQuote = data[Math.floor(Math.random() * data.length)];
+          this.setState({
+            quote: randomQuote.text,
+            author: randomQuote.author
+          }, () => {
+            // Animate the new quote in
+            $("#text, #author").fadeIn(500);
+          });
+        })
+        .catch(err => console.error(err));
+    });
   }
 
   render() {
@@ -43,8 +49,10 @@ class QuoteMachine extends React.Component {
           </header>
           <section>
             <div id="quote-box" className="p-4 border rounded">
-              <p id="text" className="lead">{this.state.quote}</p>
-              <p id="author">- {this.state.author}</p>
+              <div className="top">
+                <p id="text" className="lead">{this.state.quote}</p>
+                <p id="author">- {this.state.author}</p>
+              </div>
               <div className="bottom ">
                 <a
                   id="tweet-quote"
@@ -73,7 +81,7 @@ class QuoteMachine extends React.Component {
 
 root.render(
   <React.StrictMode>
-    <QuoteMachine />
+   <QuoteMachine /> 
   </React.StrictMode>
 );
 
