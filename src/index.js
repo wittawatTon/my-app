@@ -45,7 +45,7 @@ class QuoteMachine extends React.Component {
       <div className="container">
         <div id="wrapper" className="text-center mt-5">
           <header className="App-header">
-            <h1>Random Quote Machine</h1>
+            <h1>Random Quote Machine:</h1>
           </header>
           <section>
             <div id="quote-box" className="p-4 border rounded">
